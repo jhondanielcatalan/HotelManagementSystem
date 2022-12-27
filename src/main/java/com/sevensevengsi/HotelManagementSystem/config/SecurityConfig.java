@@ -1,6 +1,5 @@
 package com.sevensevengsi.HotelManagementSystem.config;
 
-import com.sevensevengsi.HotelManagementSystem.service.UserServiceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService getUserDetailsService() {
-        return new UserServiceConfig();
+        return new UserConfig.UserServiceConfig();
     }
 
     @Bean
