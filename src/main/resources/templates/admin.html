@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ThreeBago</title>
 </head>
 <body>
- This is for Admin...
+<div th:replace="navbar::navigation-bar"></div>
+<div class="flex flex-col justify-center content-center items-center self-center">
+ <h2>ADMIN</h2>
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg" ><table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr><th scope="col" class="py-3 px-6">ID</th><th scope="col" class="py-3 px-6">Name</th><th scope="col" class="py-3 px-6">UserName</th><th th scope="col" class="py-3 px-6">Actions</th></tr>
+        </thead>
+
+        <tbody th:if="${listUser} ">
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" th:each="User : ${listUser} ">
+            <td class="py-4 px-6"><span th:text="${User.id}"></span></td>
+            <td class="py-4 px-6"><span th:text="${User.fullName}"></span></td>
+            <td class="py-4 px-6"><span th:text="${User.username}"></span></td>
+            <td>Edit/<a th:href="@{/admin/deleteUser/{id}(id=${User.id})} "> <button class="group overflow-hidden bg-red-700 text-white rounded-lg text-lg shadow items-center hover:bg-red-200 ">
+                Delete
+            </button>
+            </a></td>
+        </tr>
+        </tbody>
+    </table></div>
+
+
+</div>
 </body>
 </html>

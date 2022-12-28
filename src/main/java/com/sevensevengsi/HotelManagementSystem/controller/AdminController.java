@@ -8,14 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
 
     @Autowired
     private UserRepository userRepo;
@@ -28,9 +29,17 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model,@ModelAttribute("user") User user)
+    {
+        List<User> listUser = userRepo.getAllUsers();
+        model.addAttribute("listUser",listUser);
      return "/admin";
     }
 
+    @GetMapping("/deleteUser/{id}")
+    public String editUser(@PathVariable(value = "id") int id) {
+        userRepo.deleteById(id);
+        return "redirect:/admin/";
+    }
 
 }
